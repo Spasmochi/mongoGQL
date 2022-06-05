@@ -7,13 +7,14 @@ export class LessonResolver {
   constructor(private lessonService: LessonService) {}
 
   @Query((returns) => LessonType)
-  Lesson() {
-    return {
-      id: '1',
-      name: 'Lesson 1',
-      startDate: '2020-01-01',
-      endDate: '2020-01-02',
-    };
+  lesson(@Args('id') id: string) {
+    return this.lessonService.getLesson(id);
+  }
+
+  // get all lessons
+  @Query((returns) => [LessonType])
+  lessons() {
+    return this.lessonService.getAllLessons();
   }
 
   @Mutation((returns) => LessonType)
